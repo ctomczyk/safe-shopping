@@ -1,0 +1,131 @@
+$outline-focus: 2px dotted darken($color-1, 50%);
+
+:root {
+  .safe-alert-message {
+    background: rgba(0, 0, 0, 0.7);
+    color: $color-1;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    padding: $padding-sm 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+
+    div {
+      align-items: center;
+      animation-delay: initial;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-name: fade-in;
+      display: flex;
+      justify-content: center;
+      margin-top: -7rem;
+      max-height: 4rem;
+      position: relative;
+      top: 0;
+      width: auto;
+
+      @supports (height: fit-content) {
+        height: fit-content;
+      }
+
+      &:focus {
+        outline: 1px dotted darken($color-1, 50%);
+        outline-offset: 2px;
+      }
+
+      a {
+        align-items: center;
+        background: $color-2;
+        border-radius: 5px;
+        box-shadow: 0 0 18px -1px rgba(0, 0, 0, 0.32);
+        color: $color-1;
+        display: inline-flex;
+        font-family: $font-family-sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        justify-content: center;
+        padding: 0.5rem 2rem;
+        text-decoration-skip-ink: auto;
+        text-underline-position: below;
+        transition: margin-top 0.3s ease-in-out;
+
+        &:link,
+        &:visited {
+          background: $color-2;
+          color: $color-1;
+          text-decoration: none;
+        }
+
+        &:focus,
+        &:hover {
+          background: darken($color-2, 10%);
+          color: $color-1;
+          outline: $outline-focus;
+          outline-offset: 2px;
+          text-decoration: underline;
+        }
+
+        &:active {
+          background: darken($color-2, 20%);
+          color: $color-1;
+          text-decoration: none;
+        }
+
+        &::after {
+          @include background-svg('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="#fff" d="M2.469 0l-2.469 3h2v5h1v-5h2l-2.531-3z" transform="translate(1)"></path></svg>');
+          content: ""; // \21f1, ⇱
+          display: inline-flex;
+          height: 1rem;
+          margin-left: $margin-xs;
+          margin-top: -$margin-xs;
+          position: relative;
+          transform: rotateY(0deg) rotate(45deg);
+          width: 1rem;
+        }
+      }
+
+      button {
+        background: $color-4;
+        border: 0;
+        color: $color-1;
+        font-size: 16px;
+        margin-left: $margin * 2;
+        padding: $padding-sm $padding-lm;
+
+        &:focus,
+        &:hover {
+          outline: $outline-focus;
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    margin-top: -7rem;
+    opacity: 0;
+  }
+
+  to {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+.visually-hidden {
+  border: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
