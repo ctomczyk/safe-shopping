@@ -1,5 +1,5 @@
 {
-  "description": "Determine shopping issues and raise a warning",
+  "description": "Determine the shopping domain name and raise a warning when there are user concerns.",
   "manifest_version": 3,
   "name": "Safe Shopping",
   "version": "0.0.1",
