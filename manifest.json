@@ -35,15 +35,7 @@
       ]
     }
   ],
-  "permissions": [
-    "activeTab",
-    "declarativeNetRequest",
-    "scripting",
-    "storage",
-    "tabs",
-    "unlimitedStorage",
-    "webNavigation"
-  ],
+  "permissions": [],
   "host_permissions": [
     "*://*/*"
   ],
