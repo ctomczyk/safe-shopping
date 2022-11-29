@@ -25,12 +25,16 @@ class ContentScript {
 
     el.className = 'safe-alert-message';
     el.id = this.elementMessageId;
+    el.setAttribute('role', 'alert');
+    el.setAttribute('tabindex', '-1');
     el.style.zIndex = String(CommonUtility.getHighestZindex() + 1);
 
     const languageForTranslations: string = CommonUtility.getLanguageForTranslations();
     const currentTranslations: ITranslation = typeof translations[languageForTranslations] === 'undefined' ? translations.en : translations[languageForTranslations];
 
-    el.innerHTML = `<div lang="${languageForTranslations}" id="${this.elementMessageId}_inner" role="alert" tabindex="-1"><a href="https://www.coi.cz/pro-spotrebitele/rizikove-e-shopy/" target="_blank" rel="noopener" aria-describedby="opens-an-external-site-in-new-window">${currentTranslations.message}</a><button type="button">${currentTranslations.actionClose}</button></div>
+    el.setAttribute('lang', languageForTranslations);
+
+    el.innerHTML = `<div><a href="https://www.coi.cz/pro-spotrebitele/rizikove-e-shopy/" target="_blank" rel="noopener" aria-describedby="opens-an-external-site-in-new-window">${currentTranslations.message}</a><button type="button">${currentTranslations.actionClose}</button></div>
     <span hidden>
       <span id="opens-an-external-site-in-new-window">${currentTranslations.openNewUrl}</span>
     </span>`;
@@ -42,12 +46,6 @@ class ContentScript {
     try {
       CommonUtility.createCSS(styles, document.head, styleElementId);
     } catch (e) { /* empty */ }
-
-    window.setTimeout((): void => {
-      const innerContainer: HTMLElement | null = el.querySelector(`#${this.elementMessageId}_inner`);
-
-      innerContainer?.focus();
-    }, 500);
 
     const button: HTMLButtonElement | null = el.querySelector('button');
 
@@ -75,7 +73,7 @@ class ContentScript {
       }
 
       const eventTarget: HTMLElement = event.target as HTMLElement;
-      const messageContainer: HTMLElement | null = eventTarget.closest(`#${this.elementMessageId}_inner`);
+      const messageContainer: HTMLElement | null = eventTarget.closest(`#${this.elementMessageId}`);
 
       if (messageContainer) {
         return;
@@ -89,6 +87,10 @@ class ContentScript {
     document.body.addEventListener('keydown', removeMessageOnOutsideClick);
 
     window.sessionStorage.setItem('safeShopping', 'installed');
+
+    window.setTimeout((): void => {
+      el?.focus();
+    }, 500);
   }
 
   public async evaluateSiteHostname(): Promise<void> {

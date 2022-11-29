@@ -13,6 +13,11 @@ $outline-focus: 2px dotted darken($color-1, 50%);
     width: 100%;
     z-index: 1000;
 
+    &:focus {
+      outline: 1px dotted darken($color-1, 50%);
+      outline-offset: -2px;
+    }
+
     div {
       align-items: center;
       animation-delay: initial;
@@ -30,11 +35,6 @@ $outline-focus: 2px dotted darken($color-1, 50%);
 
       @supports (height: fit-content) {
         height: fit-content;
-      }
-
-      &:focus {
-        outline: 1px dotted darken($color-1, 50%);
-        outline-offset: 2px;
       }
 
       a {
