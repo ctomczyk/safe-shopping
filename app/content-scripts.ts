@@ -34,7 +34,7 @@ class ContentScript {
 
     el.setAttribute('lang', languageForTranslations);
 
-    el.innerHTML = `<div><a href="https://www.coi.cz/pro-spotrebitele/rizikove-e-shopy/" target="_blank" rel="noopener" aria-describedby="opens-an-external-site-in-new-window">${currentTranslations.message}</a><button type="button">${currentTranslations.actionClose}</button></div>
+    el.innerHTML = `<div><a href="https://www.coi.cz/pro-spotrebitele/rizikove-e-shopy/#:~:text=${location.hostname}" target="_blank" rel="noopener" aria-describedby="opens-an-external-site-in-new-window">${currentTranslations.message}</a><button type="button">${currentTranslations.actionClose}</button></div>
     <span hidden>
       <span id="opens-an-external-site-in-new-window">${currentTranslations.openNewUrl}</span>
     </span>`;
